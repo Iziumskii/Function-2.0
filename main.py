@@ -16,13 +16,15 @@ class PhoneBook:
         if contact in self.contacts:
             self.contacts.remove(contact)
 
-    def find_contact(self, name):
-        pass
-        # if name == Contact.__name__:
-        #     return Contact.__name__
+    def find_contact(self, name, surname):
+        for contact in self.contacts:
+            if name == contact.name and surname == contact.surname:
+                return contact
 
-    def find_favor_contact(self, fav):
-        pass
+    def find_favor_contact(self, favor):
+        for contact in self.contacts:
+            if favor == contact.select:
+                print(contact)
 
 
 class Contact:
@@ -33,17 +35,18 @@ class Contact:
         self.phone = phone
         self.inf = args, kwargs
 
-    def favor(self):
-        favor = False
-        if not favor:
+    select = False
+
+    def favor(self, fav):
+        if not fav:
             return 'нет'
         else:
             return 'да'
 
     def __str__(self):
-        return str(f'Имя:{self.name} \nФамилия:{self.surname} \nТелефон:{self.phone} \nВ избранных:{self.favor()}'
-                   f' \nДополнительная информация:\n {self.inf}')
-
+        return str(
+            f'Имя:{self.name} \nФамилия:{self.surname} \nТелефон:{self.phone} \nВ избранных:{self.favor(Contact.select)}'
+            f' \nДополнительная информация:\n {self.inf}')
 
 
 book = PhoneBook('test')
@@ -53,7 +56,8 @@ alex = Contact('Alex', 'Bolt', '+74683126987', telegram='@Allexx', email='alex@b
 book.add_contact(jhon)
 book.add_contact(alex)
 
-#print(book.show_contact(alex))
-#book.del_contact(alex)
-
-print(book.contacts)
+# print(book.show_contact(alex))
+# book.del_contact(alex)
+# print(book.contacts)
+# print(book.find_contact('Alex', 'Bolt'))
+# print(book.find_favor_contact(False))
